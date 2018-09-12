@@ -1,6 +1,9 @@
 import { Request, Response } from "express";
+import { CensusController } from "./controllers/censusController";
 
 export class Routes {
+  public censusController: CensusController = new CensusController();
+
   public routes(app): void {
     app.route("/").get((req: Request, res: Response) => {
       res.status(200).send({
@@ -10,33 +13,13 @@ export class Routes {
 
     app
       .route("/census")
-      .get((req: Request, res: Response) => {
-        res.status(200).send({
-          message: "GET census"
-        });
-      })
-      .post((req: Request, res: Response) => {
-        res.status(200).send({
-          message: "POST census entry"
-        });
-      });
+      .get(this.censusController.getCensus)
+      .post(this.censusController.addNewCensusEntry);
 
     app
       .route("/census/:entryId")
-      .get((req: Request, res: Response) => {
-        res.status(200).send({
-          message: "GET census entry"
-        });
-      })
-      .put((req: Request, res: Response) => {
-        res.status(200).send({
-          message: "PUT  census entry"
-        });
-      })
-      .delete((req: Request, res: Response) => {
-        res.status(200).send({
-          message: "census entry"
-        });
-      });
+      .get(this.censusController.getCensusEntry)
+      .put(this.censusController.updateEntry)
+      .delete(this.censusController.deleteContact);
   }
 }
