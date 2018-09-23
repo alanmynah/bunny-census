@@ -1,8 +1,8 @@
 import * as mongoose from "mongoose";
-import { CensusEntry } from "../models/census";
+import { CensusSchema } from "../models/census";
 import { Request, Response } from "express";
 
-const censusEntry = mongoose.model("CensusEntry", CensusEntry);
+const censusEntry = mongoose.model("CensusEntry", CensusSchema);
 export class CensusController {
   public getCensus(req: Request, res: Response) {
     censusEntry.find({}, (err, census) => {
@@ -16,9 +16,9 @@ export class CensusController {
   public getCensusEntry(req: Request, res: Response) {
     censusEntry.findById(req.params.entryId, (err, entry) => {
       if (err) {
-        res.send(err);
+        res.status(500).send(err);
       }
-      res.json(entry);
+      res.status(200).json(entry);
     });
   }
 
@@ -27,9 +27,9 @@ export class CensusController {
 
     newCensusEntry.save((err, entry) => {
       if (err) {
-        res.send(err);
+        res.status(500).send(err);
       }
-      res.json(entry);
+      res.status(200).json(entry);
     });
   }
 
@@ -48,11 +48,11 @@ export class CensusController {
   }
 
   public deleteEntry(req: Request, res: Response) {
-    censusEntry.remove({ _id: req.params.entryId }, (err, entryId) => {
+    censusEntry.remove({ _id: req.params.entryId }, err => {
       if (err) {
         res.send(err);
       }
-      res.json({ message: `Deleted entry! ${entryId}` });
+      res.json({ message: `Deleted entry! ${req.params.entryId}` });
     });
   }
 }
