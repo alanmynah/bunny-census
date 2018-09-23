@@ -20,6 +20,6 @@ export class Routes {
       .route("/census/:entryId")
       .get(this.censusController.getCensusEntry)
       .put(this.censusController.updateEntry)
-      .delete(this.censusController.deleteContact);
+      .delete(this.censusController.deleteEntry);
   }
 }

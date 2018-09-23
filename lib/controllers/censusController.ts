@@ -47,7 +47,7 @@ export class CensusController {
     );
   }
 
-  public deleteContact(req: Request, res: Response) {
+  public deleteEntry(req: Request, res: Response) {
     censusEntry.remove({ _id: req.params.entryId }, (err, entryId) => {
       if (err) {
         res.send(err);
