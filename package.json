@@ -4,9 +4,11 @@
   "description": "bunny census",
   "scripts": {
     "build": "tsc",
-    "dev": "ts-node ./lib/server.ts",
+    "postinstall": "npm run build",
+    "start": "node ./dist/server.js",
     "serve": "nodemon ./dist/server.js",
-    "start": "npm run build && npm run serve"
+    "dev": "ts-node ./lib/server.ts",
+    "build-serve": "npm run build && npm run start"
   },
   "repository": {
     "type": "git",
