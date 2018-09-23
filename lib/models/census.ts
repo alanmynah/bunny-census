@@ -2,19 +2,20 @@ import * as mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
-export const CensusEntry = new Schema({
-  bunnyName: {
+export const CensusSchema: mongoose.Schema = new Schema({
+  name: {
     type: String,
     required: "Enter bunny name"
   },
   colour: {
     type: String,
-    required: "Enter a bunny colour"
+    required: "Enter bunny colour"
   },
   size: {
-    type: String
+    type: String,
+    required: "Enter bunny size"
   },
-  created_date: {
+  createdAt: {
     type: Date,
     default: Date.now
   }
