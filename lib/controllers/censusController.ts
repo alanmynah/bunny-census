@@ -7,9 +7,9 @@ export class CensusController {
   public getCensus(req: Request, res: Response) {
     censusEntry.find({}, (err, census) => {
       if (err) {
-        res.send(err);
+        res.status(500).send(err);
       }
-      res.json(census);
+      res.status(200).json(census);
     });
   }
 
@@ -23,7 +23,7 @@ export class CensusController {
   }
 
   public addNewCensusEntry(req: Request, res: Response) {
-    let newCensusEntry = new censusEntry(req.body);
+    const newCensusEntry = new censusEntry(req.body);
 
     newCensusEntry.save((err, entry) => {
       if (err) {
