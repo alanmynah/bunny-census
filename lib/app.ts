@@ -2,6 +2,7 @@ import * as express from "express";
 import * as mongoose from "mongoose";
 import * as bodyParser from "body-parser";
 import * as dotenv from "dotenv";
+import * as helmet from "helmet";
 import { Routes } from "./routes";
 
 class App {
@@ -17,10 +18,11 @@ class App {
   }
 
   private config(): void {
+    this.app.use(helmet());
     // support application/json type post data
     this.app.use(bodyParser.json());
     //support application/x-www-form-urlencoded post data
-    this.app.use(bodyParser.urlencoded({ extended: false }));
+    this.app.use(bodyParser.urlencoded({ extended: true }));
   }
 
   private dbConfig(): void {
