@@ -9,10 +9,6 @@ https://bunny-census.herokuapp.com/ - "GET  root" - use as test
 /census
     - GET - All entries
     - POST - Create entry
-    POST structure:
-    name: string, required
-    colour: string, required
-    size: string, required
 
 /census/:entryId
     - GET - Get entry
