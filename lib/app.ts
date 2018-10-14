@@ -3,6 +3,7 @@ import * as mongoose from "mongoose";
 import * as bodyParser from "body-parser";
 import * as dotenv from "dotenv";
 import * as helmet from "helmet";
+import * as cors from "cors";
 import { Routes } from "./routes";
 
 class App {
@@ -23,11 +24,7 @@ class App {
     this.app.use(bodyParser.json());
     //support application/x-www-form-urlencoded post data
     this.app.use(bodyParser.urlencoded({ extended: true }));
-    this.app.all("/", (req, res, next) => {
-      res.header("Access-Control-Allow-Origin", "*");
-      res.header("Access-Control-Allow-Headers", "X-Requested-With");
-      next();
-    });
+    this.app.use(cors);
   }
 
   private dbConfig(): void {
