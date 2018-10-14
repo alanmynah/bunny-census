@@ -23,12 +23,9 @@ class App {
     this.app.use(bodyParser.json());
     //support application/x-www-form-urlencoded post data
     this.app.use(bodyParser.urlencoded({ extended: true }));
-    this.app.use((req, res, next) => {
+    this.app.all("/", (req, res, next) => {
       res.header("Access-Control-Allow-Origin", "*");
-      res.header(
-        "Access-Control-Allow-Headers",
-        "Origin, X-Requested-With, Content-Type, Accept"
-      );
+      res.header("Access-Control-Allow-Headers", "X-Requested-With");
       next();
     });
   }
