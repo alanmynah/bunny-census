@@ -24,12 +24,19 @@ class App {
     this.app.use(bodyParser.json());
     //support application/x-www-form-urlencoded post data
     this.app.use(bodyParser.urlencoded({ extended: true }));
-    this.app.use(cors);
+    const corsOptions: cors.CorsOptions = {
+      origin: "*",
+      optionsSuccessStatus: 200
+    };
+    this.app.use(cors(corsOptions));
   }
 
   private dbConfig(): void {
     const mongodb = process.env.MONGO;
-    mongoose.connect(mongodb);
+    mongoose.connect(
+      mongodb,
+      { useNewUrlParser: true }
+    );
     const db = mongoose.connection;
     db.on("error", console.error.bind(console, "MongoDB connection error:"));
   }
